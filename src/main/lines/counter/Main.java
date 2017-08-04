@@ -1,5 +1,6 @@
 package main.lines.counter;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
@@ -19,7 +20,12 @@ public class Main {
         if (path == null) {
             System.err.println("Argument '-p' not found");
         } else {
-            //TODO calculate number of lines
+            Counter counter = new LinesCounter();
+            try {
+                System.out.println(counter.calculate(path));
+            } catch (FileNotFoundException e) {
+                System.err.println(e.getMessage());
+            }
         }
     }
 

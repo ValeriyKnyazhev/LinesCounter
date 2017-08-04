@@ -7,5 +7,5 @@ import java.io.FileNotFoundException;
  */
 interface Counter {
 
-    int calculate() throws FileNotFoundException;
+    int calculate(String filePath) throws FileNotFoundException;
 }
