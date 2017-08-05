@@ -1,7 +1,5 @@
-package test;
-
-import main.lines.counter.Counter;
-import main.lines.counter.LinesCounter;
+import lines.counter.Counter;
+import lines.counter.LinesCounter;
 import org.junit.*;
 
 import java.io.*;

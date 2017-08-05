@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LinesCounter.iml" filepath="$PROJECT_DIR$/.idea/LinesCounter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LinesCounter.iml" filepath="$PROJECT_DIR$/.idea/modules/LinesCounter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LinesCounter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/LinesCounter_main.iml" group="LinesCounter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LinesCounter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/LinesCounter_test.iml" group="LinesCounter" />
     </modules>
   </component>
 </project>

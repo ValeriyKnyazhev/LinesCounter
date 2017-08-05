@@ -1,4 +1,4 @@
-package main.lines.counter;
+package lines.counter;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -30,7 +30,7 @@ public class Main {
     }
 
     private static void parseParameters(String[] args) {
-        for (int i = 0; i < args.length; i++)
+        for (int i = 0; i < args.length; i++) {
             switch (args[i].charAt(0)) {
                 case '-':
                     if (args[i].length() != 2) {
@@ -38,12 +38,14 @@ public class Main {
                     } else if (args.length - 1 == i) {
                         throw new IllegalArgumentException("Expected argument after: " + args[i]);
                     } else {
-                        options.put(args[i].substring(1, 2), args[++i]);
+                        options.put(args[i].substring(1, 2), args[i + 1]);
+                        i++;
                     }
                     break;
                 default:
                     throw new IllegalArgumentException("Expected arguments for start application");
             }
+        }
     }
 
 }

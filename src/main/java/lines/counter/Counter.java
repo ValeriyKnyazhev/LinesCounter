@@ -1,4 +1,4 @@
-package main.lines.counter;
+package lines.counter;
 
 import java.io.FileNotFoundException;
 
