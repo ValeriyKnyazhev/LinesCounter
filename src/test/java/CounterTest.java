@@ -12,11 +12,13 @@ import java.util.List;
 import java.util.UUID;
 
 import static java.nio.file.Files.delete;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Valeriy Knyazhev valeriy.knyazhev@yandex.ru
  */
-public class CounterTest extends Assert {
+public class CounterTest {
 
     private final static int FILES_COUNT = 3;
 
@@ -78,7 +80,7 @@ public class CounterTest extends Assert {
     }
 
     private static void testFailed() {
-        assert false;
+        assertTrue(false);
     }
 
     @AfterClass
