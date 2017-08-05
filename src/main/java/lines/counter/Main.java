@@ -1,6 +1,6 @@
 package lines.counter;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -23,7 +23,7 @@ public class Main {
             Counter counter = new LinesCounter();
             try {
                 System.out.println(counter.calculate(path));
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
         }
