@@ -24,7 +24,8 @@ public class CounterTest extends Assert {
 
     private final static String LINE_SEPARATOR = System.lineSeparator();
 
-    private final static String TEST_DIRECTORY = "." + File.separator;
+    private final static String TEST_DIRECTORY = "." + File.separator + "src" + File.separator +
+            "test" + File.separator + "java" + File.separator + "resources" + File.separator;
 
     private static List<String> fileNames = new ArrayList<>();
 
@@ -47,17 +48,20 @@ public class CounterTest extends Assert {
 
     private static void createFile(Path path, boolean isEmpty) {
         try {
+            if (!path.getParent().toFile().exists()) {
+                Files.createDirectory(path.getParent());
+            }
             Files.createFile(path);
             if (!isEmpty) {
-                fillFile(path.getFileName().toString());
+                fillFile(path.toString());
             }
             System.out.println(path.getFileName().toString() + " is created");
         } catch (FileAlreadyExistsException e) {
             System.err.println("File " + path.getFileName() + " already exists");
-            assert false;
+            testFailed();
         } catch (IOException e) {
             System.err.println(e.getMessage());
-            assert false;
+            testFailed();
         }
     }
 
@@ -73,6 +77,10 @@ public class CounterTest extends Assert {
         }
     }
 
+    private static void testFailed() {
+        assert false;
+    }
+
     @AfterClass
     public static void removeFiles() {
         fileNames.stream().map(Paths::get).forEach(CounterTest::removeFile);
@@ -81,8 +89,10 @@ public class CounterTest extends Assert {
 
     private static void removeFile(Path path) {
         try {
-            delete(path);
-            System.out.println(path.getFileName().toString() + " is removed");
+            System.out.println(path.toAbsolutePath());
+            System.out.println(path);
+            delete(path.toAbsolutePath());
+            System.out.println(path.toString() + " is removed");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -91,11 +101,11 @@ public class CounterTest extends Assert {
     @Test
     public void testLinesCounterAtEmptyFile() {
         int result = -1;
-        int expected  = 0;
+        int expected = 0;
         try {
             result = this.counter.calculate(emptyFileName);
         } catch (IOException e) {
-            assert false;
+            testFailed();
         }
         System.out.println("Expected: " + expected + " and have: " + result);
         assertEquals(expected, result);
@@ -105,16 +115,16 @@ public class CounterTest extends Assert {
     public void testLinesCounter() {
         fileNames.forEach(it -> {
             int result = -1;
-            int expected  = -2;
+            int expected = -2;
             try {
                 result = this.counter.calculate(it);
             } catch (IOException e) {
-                assert false;
+                testFailed();
             }
             try {
                 expected = runWc(it);
             } catch (IOException | InterruptedException e) {
-                assert false;
+                testFailed();
             }
             System.out.println("Expected: " + expected + " and have: " + result);
             assertEquals(expected, result);
