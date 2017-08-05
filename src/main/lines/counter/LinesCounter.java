@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * @author Valeriy Knyazhev valeriy.knyazhev@yandex.ru
  */
-class LinesCounter implements Counter {
+public class LinesCounter implements Counter {
 
     @Override
     public int calculate(String filePath) throws FileNotFoundException {

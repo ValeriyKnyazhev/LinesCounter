@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 /**
  * @author Valeriy Knyazhev valeriy.knyazhev@yandex.ru
  */
-interface Counter {
+public interface Counter {
 
     int calculate(String filePath) throws FileNotFoundException;
 }
