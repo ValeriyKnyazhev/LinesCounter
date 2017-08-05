@@ -22,7 +22,7 @@ public class CounterTest extends Assert {
 
     private final static int MAX_LINES_COUNT = 100;
 
-    private final static String LINE_SEPARATOR = System.getProperty("line.separator");
+    private final static String LINE_SEPARATOR = System.lineSeparator();
 
     private final static String TEST_DIRECTORY = "." + File.separator;
 
@@ -62,11 +62,11 @@ public class CounterTest extends Assert {
     }
 
     private static void fillFile(String path) throws FileNotFoundException {
-        try (final BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+        try (final FileOutputStream writer = new FileOutputStream(path)) {
             int numberOfLines = (int) (MAX_LINES_COUNT * Math.random() + 1);
             for (int i = 0; i < numberOfLines; ++i) {
-                String content = String.valueOf(Math.random());
-                writer.write(content + LINE_SEPARATOR);
+                String content = String.valueOf(Math.random()) + LINE_SEPARATOR;
+                writer.write(content.getBytes());
             }
         } catch (IOException e) {
             throw new FileNotFoundException("File " + path + " not found");
@@ -93,8 +93,8 @@ public class CounterTest extends Assert {
         int result = -1;
         int expected  = 0;
         try {
-            result = this.counter.calculate(this.emptyFileName);
-        } catch (FileNotFoundException e) {
+            result = this.counter.calculate(emptyFileName);
+        } catch (IOException e) {
             assert false;
         }
         System.out.println("Expected: " + expected + " and have: " + result);
@@ -108,7 +108,7 @@ public class CounterTest extends Assert {
             int expected  = -2;
             try {
                 result = this.counter.calculate(it);
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 assert false;
             }
             try {
@@ -127,7 +127,7 @@ public class CounterTest extends Assert {
         String incorrectName = generateName();
         try {
             this.counter.calculate(incorrectName);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             thrown = true;
         }
         assertTrue(thrown);
